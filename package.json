@@ -1,0 +1,28 @@
+{
+  "name": "secrets-manager-with-cognito",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk",
+    "cdk:synth": "cdk synth",
+    "cdk:deploy": "cdk deploy",
+    "cdk:destroy": "cdk destroy"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cognito-identity": "^3.600.0",
+    "@aws-sdk/client-secrets-manager": "^3.600.0",
+    "@aws-sdk/credential-providers": "^3.600.0",
+    "aws-cdk-lib": "^2.0.0"
+  },
+  "peerDependencies": {
+    "aws-cdk-lib": "^2.0.0",
+    "constructs": "^10.0.0"
+  },
+  "devDependencies": {
+    "aws-cdk-lib": "^2.0.0",
+    "constructs": "^10.0.0",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.2.3"
+  }
+}
