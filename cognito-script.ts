@@ -1,6 +1,9 @@
 import { CognitoIdentityClient, GetOpenIdTokenForDeveloperIdentityCommand, GetCredentialsForIdentityCommand } from "@aws-sdk/client-cognito-identity";
 import { SecretsManagerClient, CreateSecretCommand } from "@aws-sdk/client-secrets-manager";
 import { z } from "zod";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const envSchema = z.object({
     REGION: z.string(),
