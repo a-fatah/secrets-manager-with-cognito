@@ -15,7 +15,6 @@ const REGION = env.REGION;
 const IDENTITY_POOL_ID = env.IDENTITY_POOL_ID;
 const DEVELOPER_PROVIDER_NAME = env.DEVELOPER_PROVIDER_NAME;
 const DEVELOPER_USER_IDENTIFIER = env.DEVELOPER_USER_IDENTIFIER;
-}
 
 const cognitoClient = new CognitoIdentityClient({ region: REGION });
 
