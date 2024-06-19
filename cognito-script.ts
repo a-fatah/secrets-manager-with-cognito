@@ -1,22 +1,20 @@
 import { CognitoIdentityClient, GetOpenIdTokenForDeveloperIdentityCommand, GetCredentialsForIdentityCommand } from "@aws-sdk/client-cognito-identity";
 import { SecretsManagerClient, CreateSecretCommand } from "@aws-sdk/client-secrets-manager";
+import { z } from "zod";
 
-const REGION = process.env.REGION;
-const IDENTITY_POOL_ID = process.env.IDENTITY_POOL_ID;
-const DEVELOPER_PROVIDER_NAME = process.env.DEVELOPER_PROVIDER_NAME;
-const DEVELOPER_USER_IDENTIFIER = process.env.DEVELOPER_USER_IDENTIFIER;
+const envSchema = z.object({
+    REGION: z.string(),
+    IDENTITY_POOL_ID: z.string(),
+    DEVELOPER_PROVIDER_NAME: z.string(),
+    DEVELOPER_USER_IDENTIFIER: z.string()
+});
 
-if (!REGION) {
-    throw new Error("Environment variable REGION is not set");
-}
-if (!IDENTITY_POOL_ID) {
-    throw new Error("Environment variable IDENTITY_POOL_ID is not set");
-}
-if (!DEVELOPER_PROVIDER_NAME) {
-    throw new Error("Environment variable DEVELOPER_PROVIDER_NAME is not set");
-}
-if (!DEVELOPER_USER_IDENTIFIER) {
-    throw new Error("Environment variable DEVELOPER_USER_IDENTIFIER is not set");
+const env = envSchema.parse(process.env);
+
+const REGION = env.REGION;
+const IDENTITY_POOL_ID = env.IDENTITY_POOL_ID;
+const DEVELOPER_PROVIDER_NAME = env.DEVELOPER_PROVIDER_NAME;
+const DEVELOPER_USER_IDENTIFIER = env.DEVELOPER_USER_IDENTIFIER;
 }
 
 const cognitoClient = new CognitoIdentityClient({ region: REGION });
