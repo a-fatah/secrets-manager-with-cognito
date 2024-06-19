@@ -1,10 +1,10 @@
 import { CognitoIdentityClient, GetOpenIdTokenForDeveloperIdentityCommand, GetCredentialsForIdentityCommand } from "@aws-sdk/client-cognito-identity";
 import { SecretsManagerClient, CreateSecretCommand } from "@aws-sdk/client-secrets-manager";
 
-const REGION = "eu-central-1"; // e.g., "us-east-1"
-const IDENTITY_POOL_ID = "eu-central-1:f9adc9a2-91e5-4a06-9fbf-5b19f6270686"; // e.g., "us-east-1:example-pool-id"
-const DEVELOPER_PROVIDER_NAME = "projectpulse.dev"; // e.g., "mydeveloperprovider"
-const DEVELOPER_USER_IDENTIFIER = "user1234";
+const REGION = process.env.REGION || "eu-central-1"; // e.g., "us-east-1"
+const IDENTITY_POOL_ID = process.env.IDENTITY_POOL_ID; // e.g., "us-east-1:example-pool-id"
+const DEVELOPER_PROVIDER_NAME = process.env.DEVELOPER_PROVIDER_NAME || ""; // e.g., "mydeveloperprovider"
+const DEVELOPER_USER_IDENTIFIER = process.env.DEVELOPER_USER_IDENTIFIER || "user1234";
 
 const cognitoClient = new CognitoIdentityClient({ region: REGION });
 
@@ -55,8 +55,6 @@ async function getTemporaryCredentials() {
         if (!subClaim) {
             throw new Error("Failed to extract sub claim from token");
         }
-
-        console.log("Extracted sub claim:", subClaim);
 
         // Step 3: Use the temporary credentials to create a secret
         const secretsManagerClient = new SecretsManagerClient({
